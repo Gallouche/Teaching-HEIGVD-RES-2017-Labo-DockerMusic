@@ -1,7 +1,5 @@
-// Sending a message to all nodes on the local network
-var SRC_PORT = 6025;
-var PORT = 6024;
-var MULTICAST_ADDR = '239.255.255.250';
+var PORT = 8080;
+var MULTICAST_ADDR = '239.255.22.5';
 var dgram = require('dgram');
 const uuid = require('uuid/v1');
 var s = dgram.createSocket('udp4');

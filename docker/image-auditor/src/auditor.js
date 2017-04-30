@@ -3,8 +3,8 @@ var clientUDP = dgram.createSocket('udp4');
 var moment = require('moment');
 var tcp = require('net');
 
-var PORT = 6024;
-var MULTICAST_ADDR = '239.255.255.250';
+var PORT = 8080;
+var MULTICAST_ADDR = '239.255.22.5';
 var TCP_PORT =  2205;
 var TCP_ADDRESS = '0.0.0.0';
 
@@ -31,10 +31,10 @@ var listMusicians = new Map();
     msg = JSON.parse(msg);
 
     var musician = {
-      uuid : msg.uuid,
-      instument : listInstrument[msg.sound],
-      arrived : moment().toISOString()
-    }
+      'uuid' : msg.uuid,
+      'instument' : listInstrument[msg.sound],
+      'activeSince' : moment().toISOString()
+    };
 
     console.log("Ad has arrived: '" + musician.instument + "'. Source address: " + source.address + ", source port: " + source.port);
 
@@ -49,7 +49,7 @@ var serverTCP = tcp.createServer(function(socket){
       listMusicians.delete(key);
     }
     else{
-      musicians.push(value.instument);
+      musicians.push(value);
     }
   }
 
